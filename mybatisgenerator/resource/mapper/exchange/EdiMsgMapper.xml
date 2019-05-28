@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwssi.ewindow.mapper.exchange.EdiMsgMapper" >
+  <resultMap id="BaseResultMap" type="com.gwssi.ewindow.pojo.exchange.EdiMsg" >
+    <id column="MSGID" property="msgid" jdbcType="VARCHAR" />
+    <result column="ORGCODE" property="orgcode" jdbcType="VARCHAR" />
+    <result column="ENTITYID" property="entityid" jdbcType="VARCHAR" />
+    <result column="STEP" property="step" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="STARTTIME" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="TIMESTAMP" property="timestamp" jdbcType="TIMESTAMP" />
+    <result column="EXCEPTHANDLE" property="excepthandle" jdbcType="VARCHAR" />
+    <result column="REASON" property="reason" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="DEALTIME" property="dealtime" jdbcType="TIMESTAMP" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MSGID, ORGCODE, ENTITYID, STEP, STATE, STARTTIME, ENDTIME, TIMESTAMP, EXCEPTHANDLE, 
+    REASON, USERNAME, DEALTIME, USERID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gwssi.ewindow.pojo.exchange.EdiMsgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BJ_EXCHANGE.EDI_MSG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from BJ_EXCHANGE.EDI_MSG
+    where MSGID = #{msgid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from BJ_EXCHANGE.EDI_MSG
+    where MSGID = #{msgid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gwssi.ewindow.pojo.exchange.EdiMsgExample" >
+    delete from BJ_EXCHANGE.EDI_MSG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gwssi.ewindow.pojo.exchange.EdiMsg" >
+    insert into BJ_EXCHANGE.EDI_MSG (MSGID, ORGCODE, ENTITYID, 
+      STEP, STATE, STARTTIME, 
+      ENDTIME, TIMESTAMP, EXCEPTHANDLE, 
+      REASON, USERNAME, DEALTIME, 
+      USERID)
+    values (#{msgid,jdbcType=VARCHAR}, #{orgcode,jdbcType=VARCHAR}, #{entityid,jdbcType=VARCHAR}, 
+      #{step,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{timestamp,jdbcType=TIMESTAMP}, #{excepthandle,jdbcType=VARCHAR}, 
+      #{reason,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{dealtime,jdbcType=TIMESTAMP}, 
+      #{userid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gwssi.ewindow.pojo.exchange.EdiMsg" >
+    insert into BJ_EXCHANGE.EDI_MSG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="msgid != null" >
+        MSGID,
+      </if>
+      <if test="orgcode != null" >
+        ORGCODE,
+      </if>
+      <if test="entityid != null" >
+        ENTITYID,
+      </if>
+      <if test="step != null" >
+        STEP,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="timestamp != null" >
+        TIMESTAMP,
+      </if>
+      <if test="excepthandle != null" >
+        EXCEPTHANDLE,
+      </if>
+      <if test="reason != null" >
+        REASON,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="dealtime != null" >
+        DEALTIME,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="msgid != null" >
+        #{msgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgcode != null" >
+        #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityid != null" >
+        #{entityid,jdbcType=VARCHAR},
+      </if>
+      <if test="step != null" >
+        #{step,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestamp != null" >
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="excepthandle != null" >
+        #{excepthandle,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="dealtime != null" >
+        #{dealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gwssi.ewindow.pojo.exchange.EdiMsgExample" resultType="java.lang.Integer" >
+    select count(*) from BJ_EXCHANGE.EDI_MSG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update BJ_EXCHANGE.EDI_MSG
+    <set >
+      <if test="record.msgid != null" >
+        MSGID = #{record.msgid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgcode != null" >
+        ORGCODE = #{record.orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityid != null" >
+        ENTITYID = #{record.entityid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.step != null" >
+        STEP = #{record.step,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        STARTTIME = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        ENDTIME = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.timestamp != null" >
+        TIMESTAMP = #{record.timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.excepthandle != null" >
+        EXCEPTHANDLE = #{record.excepthandle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null" >
+        REASON = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealtime != null" >
+        DEALTIME = #{record.dealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null" >
+        USERID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update BJ_EXCHANGE.EDI_MSG
+    set MSGID = #{record.msgid,jdbcType=VARCHAR},
+      ORGCODE = #{record.orgcode,jdbcType=VARCHAR},
+      ENTITYID = #{record.entityid,jdbcType=VARCHAR},
+      STEP = #{record.step,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      STARTTIME = #{record.starttime,jdbcType=TIMESTAMP},
+      ENDTIME = #{record.endtime,jdbcType=TIMESTAMP},
+      TIMESTAMP = #{record.timestamp,jdbcType=TIMESTAMP},
+      EXCEPTHANDLE = #{record.excepthandle,jdbcType=VARCHAR},
+      REASON = #{record.reason,jdbcType=VARCHAR},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      DEALTIME = #{record.dealtime,jdbcType=TIMESTAMP},
+      USERID = #{record.userid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gwssi.ewindow.pojo.exchange.EdiMsg" >
+    update BJ_EXCHANGE.EDI_MSG
+    <set >
+      <if test="orgcode != null" >
+        ORGCODE = #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityid != null" >
+        ENTITYID = #{entityid,jdbcType=VARCHAR},
+      </if>
+      <if test="step != null" >
+        STEP = #{step,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestamp != null" >
+        TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="excepthandle != null" >
+        EXCEPTHANDLE = #{excepthandle,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        REASON = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="dealtime != null" >
+        DEALTIME = #{dealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MSGID = #{msgid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gwssi.ewindow.pojo.exchange.EdiMsg" >
+    update BJ_EXCHANGE.EDI_MSG
+    set ORGCODE = #{orgcode,jdbcType=VARCHAR},
+      ENTITYID = #{entityid,jdbcType=VARCHAR},
+      STEP = #{step,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+      TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+      EXCEPTHANDLE = #{excepthandle,jdbcType=VARCHAR},
+      REASON = #{reason,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      DEALTIME = #{dealtime,jdbcType=TIMESTAMP},
+      USERID = #{userid,jdbcType=VARCHAR}
+    where MSGID = #{msgid,jdbcType=VARCHAR}
+  </update>
+</mapper>

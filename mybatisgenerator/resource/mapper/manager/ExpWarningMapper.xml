@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwssi.ewindow.mapper.manager.ExpWarningMapper" >
+  <resultMap id="BaseResultMap" type="com.gwssi.ewindow.pojo.manager.ExpWarning" >
+    <id column="WARNID" property="warnid" jdbcType="VARCHAR" />
+    <result column="WARNNAME" property="warnname" jdbcType="VARCHAR" />
+    <result column="WARNLEVEL" property="warnlevel" jdbcType="VARCHAR" />
+    <result column="WARNUSER" property="warnuser" jdbcType="VARCHAR" />
+    <result column="ORGCODE" property="orgcode" jdbcType="VARCHAR" />
+    <result column="TIMESTAMP" property="timestamp" jdbcType="TIMESTAMP" />
+    <result column="MINNUM" property="minnum" jdbcType="VARCHAR" />
+    <result column="MAXNUM" property="maxnum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    WARNID, WARNNAME, WARNLEVEL, WARNUSER, ORGCODE, TIMESTAMP, MINNUM, MAXNUM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gwssi.ewindow.pojo.manager.ExpWarningExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MANAGER.EXP_WARNING
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from MANAGER.EXP_WARNING
+    where WARNID = #{warnid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MANAGER.EXP_WARNING
+    where WARNID = #{warnid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gwssi.ewindow.pojo.manager.ExpWarningExample" >
+    delete from MANAGER.EXP_WARNING
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gwssi.ewindow.pojo.manager.ExpWarning" >
+    insert into MANAGER.EXP_WARNING (WARNID, WARNNAME, WARNLEVEL, 
+      WARNUSER, ORGCODE, TIMESTAMP, 
+      MINNUM, MAXNUM)
+    values (#{warnid,jdbcType=VARCHAR}, #{warnname,jdbcType=VARCHAR}, #{warnlevel,jdbcType=VARCHAR}, 
+      #{warnuser,jdbcType=VARCHAR}, #{orgcode,jdbcType=VARCHAR}, #{timestamp,jdbcType=TIMESTAMP}, 
+      #{minnum,jdbcType=VARCHAR}, #{maxnum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gwssi.ewindow.pojo.manager.ExpWarning" >
+    insert into MANAGER.EXP_WARNING
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="warnid != null" >
+        WARNID,
+      </if>
+      <if test="warnname != null" >
+        WARNNAME,
+      </if>
+      <if test="warnlevel != null" >
+        WARNLEVEL,
+      </if>
+      <if test="warnuser != null" >
+        WARNUSER,
+      </if>
+      <if test="orgcode != null" >
+        ORGCODE,
+      </if>
+      <if test="timestamp != null" >
+        TIMESTAMP,
+      </if>
+      <if test="minnum != null" >
+        MINNUM,
+      </if>
+      <if test="maxnum != null" >
+        MAXNUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="warnid != null" >
+        #{warnid,jdbcType=VARCHAR},
+      </if>
+      <if test="warnname != null" >
+        #{warnname,jdbcType=VARCHAR},
+      </if>
+      <if test="warnlevel != null" >
+        #{warnlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="warnuser != null" >
+        #{warnuser,jdbcType=VARCHAR},
+      </if>
+      <if test="orgcode != null" >
+        #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="minnum != null" >
+        #{minnum,jdbcType=VARCHAR},
+      </if>
+      <if test="maxnum != null" >
+        #{maxnum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gwssi.ewindow.pojo.manager.ExpWarningExample" resultType="java.lang.Integer" >
+    select count(*) from MANAGER.EXP_WARNING
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update MANAGER.EXP_WARNING
+    <set >
+      <if test="record.warnid != null" >
+        WARNID = #{record.warnid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warnname != null" >
+        WARNNAME = #{record.warnname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warnlevel != null" >
+        WARNLEVEL = #{record.warnlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warnuser != null" >
+        WARNUSER = #{record.warnuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgcode != null" >
+        ORGCODE = #{record.orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timestamp != null" >
+        TIMESTAMP = #{record.timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.minnum != null" >
+        MINNUM = #{record.minnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxnum != null" >
+        MAXNUM = #{record.maxnum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update MANAGER.EXP_WARNING
+    set WARNID = #{record.warnid,jdbcType=VARCHAR},
+      WARNNAME = #{record.warnname,jdbcType=VARCHAR},
+      WARNLEVEL = #{record.warnlevel,jdbcType=VARCHAR},
+      WARNUSER = #{record.warnuser,jdbcType=VARCHAR},
+      ORGCODE = #{record.orgcode,jdbcType=VARCHAR},
+      TIMESTAMP = #{record.timestamp,jdbcType=TIMESTAMP},
+      MINNUM = #{record.minnum,jdbcType=VARCHAR},
+      MAXNUM = #{record.maxnum,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gwssi.ewindow.pojo.manager.ExpWarning" >
+    update MANAGER.EXP_WARNING
+    <set >
+      <if test="warnname != null" >
+        WARNNAME = #{warnname,jdbcType=VARCHAR},
+      </if>
+      <if test="warnlevel != null" >
+        WARNLEVEL = #{warnlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="warnuser != null" >
+        WARNUSER = #{warnuser,jdbcType=VARCHAR},
+      </if>
+      <if test="orgcode != null" >
+        ORGCODE = #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="minnum != null" >
+        MINNUM = #{minnum,jdbcType=VARCHAR},
+      </if>
+      <if test="maxnum != null" >
+        MAXNUM = #{maxnum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WARNID = #{warnid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gwssi.ewindow.pojo.manager.ExpWarning" >
+    update MANAGER.EXP_WARNING
+    set WARNNAME = #{warnname,jdbcType=VARCHAR},
+      WARNLEVEL = #{warnlevel,jdbcType=VARCHAR},
+      WARNUSER = #{warnuser,jdbcType=VARCHAR},
+      ORGCODE = #{orgcode,jdbcType=VARCHAR},
+      TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+      MINNUM = #{minnum,jdbcType=VARCHAR},
+      MAXNUM = #{maxnum,jdbcType=VARCHAR}
+    where WARNID = #{warnid,jdbcType=VARCHAR}
+  </update>
+</mapper>
